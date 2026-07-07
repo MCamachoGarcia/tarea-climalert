@@ -1,5 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.services.impl;
 
+import ar.edu.utn.ba.ddsi.tarea_climalert.clients.WeatherAdapter;
 import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponse;
 import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.CurrentResponse;
 import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.LocationResponse;
@@ -7,15 +8,19 @@ import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.ClimaRepository;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ClimaServiceImpl implements ClimaService {
 
   private final ClimaRepository climaRepository;
+  private final WeatherAdapter weatherProvider;
 
-  public ClimaServiceImpl(ClimaRepository climaRepository) {
+  public ClimaServiceImpl(ClimaRepository climaRepository, WeatherAdapter weatherProvider) {
     this.climaRepository = climaRepository;
+    this.weatherProvider = weatherProvider;
   }
 
   @Override
@@ -26,6 +31,17 @@ public class ClimaServiceImpl implements ClimaService {
   @Override
   public ClimaResponse findById(Long id) {
     return toResponse(getClimaOrThrow(id));
+  }
+
+  @Override
+  public void procesarClima() {
+    Clima clima = weatherProvider.getClimaActual();
+
+    log.info("Obtenido Clima - Temperatura: {} , Humedad: {}",
+        clima.getTemperatura(),
+        clima.getHumedad());
+
+    climaRepository.save(clima);
   }
 
   private ClimaResponse toResponse(Clima clima) {

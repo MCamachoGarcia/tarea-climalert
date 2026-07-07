@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public record CurrentResponse(
 
     @JsonProperty("temp_c")
-    Double temeperatura,
+    Double temperatura,
 
     @JsonProperty("humidity")
     int humedad
-
 ) {
 }

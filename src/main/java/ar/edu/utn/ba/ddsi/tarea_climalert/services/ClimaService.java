@@ -8,4 +8,7 @@ public interface ClimaService {
   List<ClimaResponse> findAll();
 
   ClimaResponse findById(Long id);
+
+  void procesarClima();
+
 }
