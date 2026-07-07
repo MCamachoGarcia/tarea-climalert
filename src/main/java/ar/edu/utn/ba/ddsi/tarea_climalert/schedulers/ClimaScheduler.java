@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 public class ClimaScheduler {
 
   private final ClimaService climaService;
-  //private weather
 
   public ClimaScheduler(ClimaService climaService) {
     this.climaService = climaService;
   }
 
-  @Scheduled(fixedRate = 30000) //300000 = 5min
+  //TODO Esta para probar cada 1 min
+  @Scheduled(fixedRate = 60000) //300000 = 5min
   public void obtenerClima() {
     climaService.procesarClima();
   }

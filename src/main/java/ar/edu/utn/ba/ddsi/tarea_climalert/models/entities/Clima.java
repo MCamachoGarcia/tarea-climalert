@@ -15,6 +15,7 @@ public class Clima {
   private Double temperatura;
   private int humedad;
   private LocalDateTime timestamp;
+  private boolean procesado = false;
 
   public Clima(String pais, String ciudad, String region, Double temperatura, int humedad) {
     this.id = null; //TODO

@@ -8,6 +8,7 @@ import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.ClimaRepository;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
 import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,11 @@ public class ClimaServiceImpl implements ClimaService {
   }
 
   @Override
+  public Optional<Clima> findLast() {
+    return climaRepository.findUltimo();
+  }
+
+  @Override
   public void procesarClima() {
     Clima clima = weatherProvider.getClimaActual();
 
@@ -41,6 +47,11 @@ public class ClimaServiceImpl implements ClimaService {
         clima.getTemperatura(),
         clima.getHumedad());
 
+    climaRepository.save(clima);
+  }
+
+  @Override
+  public void update(Clima clima) {
     climaRepository.save(clima);
   }
 

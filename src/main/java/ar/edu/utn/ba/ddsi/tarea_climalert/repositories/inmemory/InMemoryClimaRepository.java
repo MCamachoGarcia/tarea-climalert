@@ -3,6 +3,7 @@ package ar.edu.utn.ba.ddsi.tarea_climalert.repositories.inmemory;
 import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.ClimaRepository;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,12 @@ public class InMemoryClimaRepository implements ClimaRepository {
   @Override
   public Optional<Clima> findById(Long id) {
     return climas.stream().filter(c -> c.getId().equals(id)).findFirst();
+  }
+
+  @Override
+  public Optional<Clima> findUltimo() {
+    return climas.stream()
+        .max(Comparator.comparing(Clima::getTimestamp));
   }
 
   @Override

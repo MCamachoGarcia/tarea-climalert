@@ -10,6 +10,8 @@ public interface ClimaRepository {
 
   Optional<Clima> findById(Long id);
 
+  Optional<Clima> findUltimo();
+
   Clima save(Clima clima);
 
   void delete(Clima clima);

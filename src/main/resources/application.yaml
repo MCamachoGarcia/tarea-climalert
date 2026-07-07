@@ -2,8 +2,25 @@ spring:
   application:
     name: tarea-climalert
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 weather:
   api:
+    base-url: ${WEATHER_API_BASE_URL}
     key: ${WEATHER_API_KEY}
-    url: ${WEATHER_API_BASE_URL}
     ubicacion: ${WEATHER_API_UBICACION}
+
+alertas:
+  emails:
+    - ${ALERTA_EMAIL_1}

@@ -8,4 +8,7 @@ public interface AlertaService {
   List<AlertaResponse> findAll();
 
   AlertaResponse findById(Long id);
+
+  void procesarUltimoClima();
+
 }
