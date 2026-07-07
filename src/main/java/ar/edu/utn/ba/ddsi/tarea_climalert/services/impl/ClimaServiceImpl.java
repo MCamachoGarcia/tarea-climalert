@@ -41,7 +41,7 @@ public class ClimaServiceImpl implements ClimaService {
   public void procesarClima() {
     Clima clima = weatherProvider.getClimaActual();
 
-    log.info("Obtenido Clima - Condicion: {} , Temperatura: {} , Humedad: {} , Timestamp: {}",
+    log.info("Obtenido Clima - Condicion: {} , Temperatura: {} °C, Humedad: {} %, Timestamp: {}",
         clima.getDescripcion(),
         clima.getTemperatura(),
         clima.getHumedad(),

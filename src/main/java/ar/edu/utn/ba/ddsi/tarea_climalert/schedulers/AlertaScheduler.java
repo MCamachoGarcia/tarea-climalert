@@ -13,8 +13,7 @@ public class AlertaScheduler {
     this.alertaService = alertaService;
   }
 
-  //TODO Esta para probar cada 30 seg
-  @Scheduled(fixedRate = 30000) //60000 = 1min
+  @Scheduled(fixedRate = 60000)
   public void procesarDatos() {
     alertaService.procesarUltimoClima();
   }

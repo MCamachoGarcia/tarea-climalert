@@ -11,8 +11,10 @@ import ar.edu.utn.ba.ddsi.tarea_climalert.services.AlertaService;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AlertaServiceImpl implements AlertaService {
 
@@ -59,13 +61,17 @@ public class AlertaServiceImpl implements AlertaService {
     climaService.update(ultimoClima);
   }
 
-  //TODO Cambiar valores
   private boolean esCondicionPeligrosa(Clima clima) {
-    return clima.getTemperatura() > 1 && clima.getHumedad() > 1;
+    return clima.getTemperatura() > 35 && clima.getHumedad() > 60;
   }
 
   private void generarAlerta(Clima clima) {
     Alerta alerta = new Alerta(TipoAlerta.CONDICION_PELIGROSA, clima);
+    log.info("Alerta generada - {} , Temperatura: {} °C, Humedad: {} %, Timestamp: {}",
+        alerta.getTipo(),
+        alerta.getClima().getTemperatura(),
+        alerta.getClima().getHumedad(),
+        alerta.getFechaDeCreacion());
     alertaRepository.save(alerta);
     notificationAdapter.enviarAlerta(alerta);
   }
@@ -76,7 +82,7 @@ public class AlertaServiceImpl implements AlertaService {
         alerta.getClima().getTemperatura(),
         alerta.getClima().getHumedad(),
         alerta.getFechaDeCreacion()
-    ); //TODO: se puede mejorar
+    );
   }
 
   private Alerta getAlertOrThrow(Long alertId) {

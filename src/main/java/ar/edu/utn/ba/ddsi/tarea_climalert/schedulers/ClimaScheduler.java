@@ -13,8 +13,7 @@ public class ClimaScheduler {
     this.climaService = climaService;
   }
 
-  //TODO Esta para probar cada 1 min
-  @Scheduled(fixedRate = 60000) //300000 = 5min
+  @Scheduled(fixedRate = 300000)
   public void obtenerClima() {
     climaService.procesarClima();
   }
