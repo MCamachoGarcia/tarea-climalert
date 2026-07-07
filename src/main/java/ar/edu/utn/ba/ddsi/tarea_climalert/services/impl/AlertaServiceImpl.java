@@ -2,9 +2,10 @@ package ar.edu.utn.ba.ddsi.tarea_climalert.services.impl;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.clients.NotificationAdapter;
 import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.AlertaResponse;
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Alerta;
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.TipoAlerta;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.alertas.Alerta;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.Clima;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.EstadoAnalisis;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.alertas.TipoAlerta;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.AlertaRepository;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.AlertaService;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
@@ -44,9 +45,9 @@ public class AlertaServiceImpl implements AlertaService {
       return;
     }
 
-    Clima ultimoClima = ultimo.get(); //isProcesado no puede aplicarse sobre un Optional<>
+    Clima ultimoClima = ultimo.get(); //getEstadoAnalisis no puede aplicarse sobre un Optional<>
 
-    if (ultimoClima.isProcesado()) {
+    if (ultimoClima.getEstadoAnalisis() == EstadoAnalisis.ANALIZADO) {
       return;
     }
 
@@ -54,10 +55,11 @@ public class AlertaServiceImpl implements AlertaService {
       generarAlerta(ultimoClima);
     }
 
-    ultimoClima.setProcesado(true);
+    ultimoClima.setEstadoAnalisis(EstadoAnalisis.ANALIZADO);
     climaService.update(ultimoClima);
   }
 
+  //TODO Cambiar valores
   private boolean esCondicionPeligrosa(Clima clima) {
     return clima.getTemperatura() > 1 && clima.getHumedad() > 1;
   }

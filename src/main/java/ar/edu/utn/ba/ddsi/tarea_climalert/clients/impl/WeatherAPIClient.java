@@ -1,9 +1,8 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.clients.impl;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.config.WeatherProperties;
-import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponse;
+import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.weatherapi.ClimaResponse;
 import java.net.URI;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;

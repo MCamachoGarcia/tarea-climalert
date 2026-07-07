@@ -1,6 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.repositories;
 
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.Clima;
 import java.util.List;
 import java.util.Optional;
 

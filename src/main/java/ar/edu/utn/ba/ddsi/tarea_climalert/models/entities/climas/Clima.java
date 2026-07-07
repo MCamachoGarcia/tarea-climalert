@@ -1,4 +1,4 @@
-package ar.edu.utn.ba.ddsi.tarea_climalert.models.entities;
+package ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas;
 
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -14,17 +14,20 @@ public class Clima {
   private String region;
   private Double temperatura;
   private int humedad;
+  private String descripcion;
   private LocalDateTime timestamp;
-  private boolean procesado = false;
+  private EstadoAnalisis estadoAnalisis;
 
-  public Clima(String pais, String ciudad, String region, Double temperatura, int humedad) {
+  public Clima(String pais, String ciudad, String region, Double temperatura, int humedad, String descripcion) {
     this.id = null;
     this.pais = pais;
     this.ciudad = ciudad;
     this.region = region;
     this.temperatura = temperatura;
     this.humedad = humedad;
+    this.descripcion = descripcion;
     this.timestamp = LocalDateTime.now();
+    this.estadoAnalisis = EstadoAnalisis.PENDIENTE;
   }
 
 }

@@ -1,6 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.clients;
 
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Alerta;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.alertas.Alerta;
 
 public interface NotificationAdapter {
 

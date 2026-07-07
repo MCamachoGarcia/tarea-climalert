@@ -1,6 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.controllers;
 
-import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponse;
+import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponseOwn;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +19,12 @@ public class ClimaController {
   }
 
   @GetMapping
-  public List<ClimaResponse> getAll() {
+  public List<ClimaResponseOwn> getAll() {
     return climaService.findAll();
   }
 
   @GetMapping("/{id}")
-  public ClimaResponse getById(@PathVariable Long id) {
+  public ClimaResponseOwn getById(@PathVariable Long id) {
     return climaService.findById(id);
   }
 

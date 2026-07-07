@@ -2,7 +2,7 @@ package ar.edu.utn.ba.ddsi.tarea_climalert.clients.impl;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.clients.NotificationAdapter;
 import ar.edu.utn.ba.ddsi.tarea_climalert.config.AlertasProperties;
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Alerta;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.alertas.Alerta;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -32,6 +32,8 @@ public class EmailNotificationAdapter implements NotificationAdapter {
                 País: %s
                 Ciudad: %s
                 Región: %s
+                
+                Condición: %s
 
                 Temperatura: %.1f °C
                 Humedad: %d %%
@@ -40,6 +42,7 @@ public class EmailNotificationAdapter implements NotificationAdapter {
         alerta.getClima().getPais(),
         alerta.getClima().getCiudad(),
         alerta.getClima().getRegion(),
+        alerta.getClima().getDescripcion(),
         alerta.getClima().getTemperatura(),
         alerta.getClima().getHumedad(),
         alerta.getClima().getTimestamp()

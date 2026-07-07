@@ -1,10 +1,8 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.services.impl;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.clients.WeatherAdapter;
-import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponse;
-import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.CurrentResponse;
-import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.LocationResponse;
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
+import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponseOwn;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.Clima;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.ClimaRepository;
 import ar.edu.utn.ba.ddsi.tarea_climalert.services.ClimaService;
 import java.util.List;
@@ -25,12 +23,12 @@ public class ClimaServiceImpl implements ClimaService {
   }
 
   @Override
-  public List<ClimaResponse> findAll() {
+  public List<ClimaResponseOwn> findAll() {
     return climaRepository.findAll().stream().map(this::toResponse).toList();
   }
 
   @Override
-  public ClimaResponse findById(Long id) {
+  public ClimaResponseOwn findById(Long id) {
     return toResponse(getClimaOrThrow(id));
   }
 
@@ -43,9 +41,11 @@ public class ClimaServiceImpl implements ClimaService {
   public void procesarClima() {
     Clima clima = weatherProvider.getClimaActual();
 
-    log.info("Obtenido Clima - Temperatura: {} , Humedad: {}",
+    log.info("Obtenido Clima - Condicion: {} , Temperatura: {} , Humedad: {} , Timestamp: {}",
+        clima.getDescripcion(),
         clima.getTemperatura(),
-        clima.getHumedad());
+        clima.getHumedad(),
+        clima.getTimestamp());
 
     climaRepository.save(clima);
   }
@@ -55,12 +55,16 @@ public class ClimaServiceImpl implements ClimaService {
     climaRepository.save(clima);
   }
 
-  private ClimaResponse toResponse(Clima clima) {
-
-    LocationResponse location = new LocationResponse(clima.getPais(), clima.getCiudad(), clima.getRegion());
-    CurrentResponse current = new CurrentResponse(clima.getTemperatura(), clima.getHumedad());
-
-    return new ClimaResponse(location, current);
+  private ClimaResponseOwn toResponse(Clima clima) {
+    return new ClimaResponseOwn(
+        clima.getPais(),
+        clima.getCiudad(),
+        clima.getRegion(),
+        clima.getDescripcion(),
+        clima.getTemperatura(),
+        clima.getHumedad(),
+        clima.getTimestamp()
+    );
   }
 
   private Clima getClimaOrThrow(Long climaId) {

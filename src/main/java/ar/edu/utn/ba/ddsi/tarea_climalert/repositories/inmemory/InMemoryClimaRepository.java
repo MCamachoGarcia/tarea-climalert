@@ -1,6 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.repositories.inmemory;
 
-import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Clima;
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.Clima;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.ClimaRepository;
 import ar.edu.utn.ba.ddsi.tarea_climalert.utils.GeneradorIdSecuencial;
 import java.util.ArrayList;

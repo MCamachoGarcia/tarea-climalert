@@ -1,5 +1,6 @@
-package ar.edu.utn.ba.ddsi.tarea_climalert.models.entities;
+package ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.alertas;
 
+import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.climas.Clima;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
