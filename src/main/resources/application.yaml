@@ -24,3 +24,5 @@ weather:
 alertas:
   emails:
     - ${ALERTA_EMAIL_1}
+    - ${ALERTA_EMAIL_2}
+    - ${ALERTA_EMAIL_3}

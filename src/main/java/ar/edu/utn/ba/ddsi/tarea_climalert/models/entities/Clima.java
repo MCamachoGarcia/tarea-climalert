@@ -18,7 +18,7 @@ public class Clima {
   private boolean procesado = false;
 
   public Clima(String pais, String ciudad, String region, Double temperatura, int humedad) {
-    this.id = null; //TODO
+    this.id = null;
     this.pais = pais;
     this.ciudad = ciudad;
     this.region = region;

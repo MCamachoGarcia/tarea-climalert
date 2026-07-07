@@ -1,8 +1,8 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.clients.impl;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.clients.NotificationAdapter;
+import ar.edu.utn.ba.ddsi.tarea_climalert.config.AlertasProperties;
 import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Alerta;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -10,16 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailNotificationAdapter implements NotificationAdapter {
 
-  @Value("${MAIL_USERNAME}")
-  private String senderEmail;
-
-  @Value("${ALERTA_EMAIL_1}")
-  private String receiverEmail;
-
   private final JavaMailSender mailSender;
+  private final AlertasProperties properties;
 
-  public EmailNotificationAdapter(JavaMailSender mailSender) {
+  public EmailNotificationAdapter(JavaMailSender mailSender, AlertasProperties alertasProperties) {
     this.mailSender = mailSender;
+    this.properties = alertasProperties;
   }
 
   @Override
@@ -27,10 +23,8 @@ public class EmailNotificationAdapter implements NotificationAdapter {
 
     SimpleMailMessage mensaje = new SimpleMailMessage();
 
-    mensaje.setFrom(senderEmail);
-    //TODO
-    //varios emails en el properties
-    mensaje.setTo(receiverEmail);
+    mensaje.setFrom(properties.getSenderEmail());
+    mensaje.setTo(properties.getEmails().toArray(String[]::new));
     mensaje.setSubject("⚠ Alerta Climática");
     mensaje.setText("""
                 Se detectó una condición climática peligrosa.

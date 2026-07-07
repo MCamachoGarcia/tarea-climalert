@@ -16,7 +16,7 @@ public class Alerta {
   private LocalDateTime fechaDeCreacion;
 
   public Alerta(TipoAlerta tipo, Clima clima) {
-    this.id = null; //TODO
+    this.id = null;
     this.tipo = tipo;
     this.clima = clima;
     this.fechaDeCreacion = LocalDateTime.now();

@@ -1,5 +1,6 @@
 package ar.edu.utn.ba.ddsi.tarea_climalert.clients.impl;
 
+import ar.edu.utn.ba.ddsi.tarea_climalert.config.WeatherProperties;
 import ar.edu.utn.ba.ddsi.tarea_climalert.dtos.ClimaResponse;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,30 +12,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class WeatherAPIClient {
 
   private final RestTemplate restTemplate;
-  //private final WeatherProperties properties;
-  //TODO
+  private final WeatherProperties properties;
 
-  @Value("${WEATHER_API_BASE_URL}")
-  private String baseUrl;
-
-  @Value("${WEATHER_API_KEY}")
-  private String apiKey;
-
-  @Value("${WEATHER_API_UBICACION}")
-  private String ubicacion;
-
-
-  public WeatherAPIClient(RestTemplate restTemplate) {
+  public WeatherAPIClient(RestTemplate restTemplate, WeatherProperties properties) {
     this.restTemplate = restTemplate;
-    //this.properties = properties;
+    this.properties = properties;
   }
 
   public ClimaResponse getClima() {
     URI uri = UriComponentsBuilder
-        .fromUriString(baseUrl)
+        .fromUriString(properties.getBaseUrl())
         .path("/current.json")
-        .queryParam("key", apiKey)
-        .queryParam("q", ubicacion)
+        .queryParam("key", properties.getKey())
+        .queryParam("q", properties.getUbicacion())
         .build()
         .toUri();
 

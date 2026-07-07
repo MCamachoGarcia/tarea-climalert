@@ -2,6 +2,7 @@ package ar.edu.utn.ba.ddsi.tarea_climalert.repositories.inmemory;
 
 import ar.edu.utn.ba.ddsi.tarea_climalert.models.entities.Alerta;
 import ar.edu.utn.ba.ddsi.tarea_climalert.repositories.AlertaRepository;
+import ar.edu.utn.ba.ddsi.tarea_climalert.utils.GeneradorIdSecuencial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class InMemoryAlertaRepository implements AlertaRepository {
 
   private final List<Alerta> alertas = new ArrayList<>();
-  //TODO
+  private final GeneradorIdSecuencial generadorId = new GeneradorIdSecuencial();
 
   @Override
   public List<Alerta> findAll() {
@@ -26,7 +27,7 @@ public class InMemoryAlertaRepository implements AlertaRepository {
   @Override
   public Alerta save(Alerta alerta) {
     if (alerta.getId() == null) {
-      alerta.setId(null); //TODO
+      alerta.setId(generadorId.siguiente());
       alertas.add(alerta);
       return alerta;
     }
