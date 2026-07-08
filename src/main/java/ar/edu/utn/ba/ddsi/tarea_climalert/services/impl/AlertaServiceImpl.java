@@ -50,6 +50,7 @@ public class AlertaServiceImpl implements AlertaService {
           .filter(condicion -> condicion.cumple(clima))
           .map(condicion -> new Alerta(condicion.tipo(), clima))
           .forEach(this::generarAlerta);
+      
       clima.setEstadoAnalisis(EstadoAnalisis.ANALIZADO);
       climaService.update(clima);
     });

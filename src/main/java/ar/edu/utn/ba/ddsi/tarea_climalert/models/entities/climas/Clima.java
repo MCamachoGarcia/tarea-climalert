@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class Clima {
 
-  private Long id; // Para trazabilidad en memoria
+  private Long id;
   private String pais;
   private String ciudad;
   private String region;
