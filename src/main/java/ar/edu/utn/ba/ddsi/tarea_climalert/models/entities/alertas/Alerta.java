@@ -10,10 +10,8 @@ import lombok.Setter;
 public class Alerta {
 
   private Long id;
-  //private EstadoAlerta estado; // Si se tiene, hacer registro. Pero no se si vale tanto la pena ya
-  // que justamente la alerta es para notificar, es algo sincronico
   private TipoAlerta tipo;
-  private Clima clima; // mm
+  private Clima clima;
   private LocalDateTime fechaDeCreacion;
 
   public Alerta(TipoAlerta tipo, Clima clima) {
